@@ -1,119 +1,119 @@
---Ä¿¼­ ½ÇÇà ´ÜÃà±â : ctrl + enter
--- ¹®¼­ ÀüÃ¼ ½ÇÇà : F5
+--ì»¤ì„œ ì‹¤í–‰ ë‹¨ì¶•ê¸° : ctrl + enter
+-- ë¬¸ì„œ ì „ì²´ ì‹¤í–‰ : F5
 
 
--- 1. °èÁ¤ Á¢¼Ó ¸í·É¾î
--- conn °èÁ¤¸í/ºñ¹Ð¹øÈ£;
+-- 1. ê³„ì • ì ‘ì† ëª…ë ¹ì–´
+-- conn ê³„ì •ëª…/ë¹„ë°€ë²ˆí˜¸;
 conn system/123456;
 
 -- 2.
--- sqlÀº ´ë/¼Ò¹®ÀÚ ±¸ºÐÀÌ ¾ø´Ù.
--- ¸í·É¾î Å°¿öµå ´ë¹®ÀÚ, ½Äº°ÀÚ´Â ¼Ò¹®ÀÚ ÁÖ·Î»ç¿ë. (°¢ÀÚ ½ºÅ¸ÀÏ´ë·Î)
+-- sqlì€ ëŒ€/ì†Œë¬¸ìž êµ¬ë¶„ì´ ì—†ë‹¤.
+-- ëª…ë ¹ì–´ í‚¤ì›Œë“œ ëŒ€ë¬¸ìž, ì‹ë³„ìžëŠ” ì†Œë¬¸ìž ì£¼ë¡œì‚¬ìš©. (ê°ìž ìŠ¤íƒ€ì¼ëŒ€ë¡œ)
 SELECT user_id, username
 FROM all_users
 -- WHERE username = 'HR'
 ;
 
--- ±âº» °èÁ¤ »ý¼º ¹× ±ÇÇÑºÎ¿©--
--- 12C ¹öÀü ÀÌ»ó: 'c##' Á¢µÎ¾î¸¦ ºÙ¿©¼­ °èÁ¤À» »ý¼ºÇÏµµ·Ï Á¤Ã¥À» Á¤ÇÔ
---  c## ¾øÀÌ °èÁ¤»ý¼º : ALTER SESSION SET '_ORACLE_SCRIPT' = TRUE;
+-- ê¸°ë³¸ ê³„ì • ìƒì„± ë° ê¶Œí•œë¶€ì—¬--
+-- 12C ë²„ì „ ì´ìƒ: 'c##' ì ‘ë‘ì–´ë¥¼ ë¶™ì—¬ì„œ ê³„ì •ì„ ìƒì„±í•˜ë„ë¡ ì •ì±…ì„ ì •í•¨
+--  c## ì—†ì´ ê³„ì •ìƒì„± : ALTER SESSION SET '_ORACLE_SCRIPT' = TRUE;
 ALTER SESSION SET "_ORACLE_SCRIPT" = TRUE;
--- HR °èÁ¤ »ý¼º
+-- HR ê³„ì • ìƒì„±
 CREATE USER HR IDENTIFIED BY 123456;
 
--- HR °èÁ¤ÀÇ ±âº» Å×ÀÌºí ¿µ¿ªÀ» 'user' ¿µ¿ªÀ¸·Î ÁöÁ¤
+-- HR ê³„ì •ì˜ ê¸°ë³¸ í…Œì´ë¸” ì˜ì—­ì„ 'user' ì˜ì—­ìœ¼ë¡œ ì§€ì •
 ALTER USER HR DEFAULT TABLESPACE users;
 
--- HR °èÁ¤ÀÇ »ç¿ë¿ë·®À» ¹«ÇÑ´ë·Î ÁöÁ¤
+-- HR ê³„ì •ì˜ ì‚¬ìš©ìš©ëŸ‰ì„ ë¬´í•œëŒ€ë¡œ ì§€ì •
 ALTER USER HR QUOTA UNLIMITED ON users;
 
--- HR °èÁ¤¿¡ ±ÇÇÑ ºÎ¿© GRANT connect, resource TO °èÁ¤¸í;
+-- HR ê³„ì •ì— ê¶Œí•œ ë¶€ì—¬ GRANT connect, resource TO ê³„ì •ëª…;
 GRANT connect, resource TO HR;
 
 
 
--- °èÁ¤ »èÁ¦ : DROP USER °èÁ¤¸í CASCADE;
+-- ê³„ì • ì‚­ì œ : DROP USER ê³„ì •ëª… CASCADE;
 DROP USER HR CASCADE;
 
--- °èÁ¤ Àá±Ý ÇØÁ¦: ALTER USER °èÁ¤¸í ACCOUNT UNLOCK;
+-- ê³„ì • ìž ê¸ˆ í•´ì œ: ALTER USER ê³„ì •ëª… ACCOUNT UNLOCK;
 ALTER USER HR ACCOUNT UNLOCK;
 
 
--- HR »ùÇÃ ½ºÅ°¸¶(µ¥ÀÌÅÍ) °¡Á®¿À±â
+-- HR ìƒ˜í”Œ ìŠ¤í‚¤ë§ˆ(ë°ì´í„°) ê°€ì ¸ì˜¤ê¸°
 -- 1. SQL PLUS
--- 2. HR °èÁ¤À» Á¢¼Ó
--- 3. ¸í·É¾î ÀÔ·Â
--- @[°æ·Î]/hr_main.sql
--- @? : ¿À¶óÅ¬ÀÌ ¼³Ä¡µÈ ±âº» °æ·Î
+-- 2. HR ê³„ì •ì„ ì ‘ì†
+-- 3. ëª…ë ¹ì–´ ìž…ë ¥
+-- @[ê²½ë¡œ]/hr_main.sql
+-- @? : ì˜¤ë¼í´ì´ ì„¤ì¹˜ëœ ê¸°ë³¸ ê²½ë¡œ
 -- @?/demo/schema/human_resources/hr_main.sql
 
--- 4. 123456 [ºñ¹Ð¹øÈ£]
+-- 4. 123456 [ë¹„ë°€ë²ˆí˜¸]
 -- 5. users [tablespace]
 -- 6. temp [temp tablespace]
--- 7. [log °æ·Î] -@?/demo/schema/log
+-- 7. [log ê²½ë¡œ] -@?/demo/schema/log
 
 
 
 -- 3.
--- Å×ÀÌºí EMPLOYEES ÀÇ Å×ÀÌºí ±¸Á¶¸¦ ÁËÈ¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ í…Œì´ë¸” êµ¬ì¡°ë¥¼ ì£„íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 DESC EMPLOYEES;
--- Å×ÀÌºí EMPLOYEES¿¡¼­ EMPLOYEE_ID, FIRST_NAME¸¦ Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEESì—ì„œ EMPLOYEE_ID, FIRST_NAMEë¥¼ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT EMPLOYEE_ID, FIRST_NAME
 FROM EMPLOYEES;
 
 
 
 -- 4. 
--- ¿¹½Ã¿Í °°ÀÌ Ãâ·Â
--- ¶ç¾î¾²±â°¡ ¾øÀ¸¸é, µû¿ÈÇ¥ »ý·«°¡´É
--- AS »ý·«°¡´É AS (alias) : Ãâ·ÂµÇ´Â Ä®·³¸í¿¡ º°¸íÀ» Áþ´Â ¸í·É¾î
-SELECT employee_id AS "»ç¿ø ¹øÈ£"
-        ,first_name ÀÌ¸§
-        ,last_name AS ¼º
-        ,email AS ÀÌ¸ÞÀÏ
-        ,phone_number AS ÀüÈ­¹øÈ£
-        ,hire_date AS ÀÔ»çÀÏÀÚ
-        ,salary AS ±Þ¿©
+-- ì˜ˆì‹œì™€ ê°™ì´ ì¶œë ¥
+-- ë„ì–´ì“°ê¸°ê°€ ì—†ìœ¼ë©´, ë”°ì˜´í‘œ ìƒëžµê°€ëŠ¥
+-- AS ìƒëžµê°€ëŠ¥ AS (alias) : ì¶œë ¥ë˜ëŠ” ì¹¼ëŸ¼ëª…ì— ë³„ëª…ì„ ì§“ëŠ” ëª…ë ¹ì–´
+SELECT employee_id AS "ì‚¬ì› ë²ˆí˜¸"
+        ,first_name ì´ë¦„
+        ,last_name AS ì„±
+        ,email AS ì´ë©”ì¼
+        ,phone_number AS ì „í™”ë²ˆí˜¸
+        ,hire_date AS ìž…ì‚¬ì¼ìž
+        ,salary AS ê¸‰ì—¬
 FROM employees
 ;
 
 --
-SELECT *                        -- (*) [¾Ö½ºÅÍ¸®Å©] :¸ðµç ÄÃ·³ ÁöÁ¤
+SELECT *                        -- (*) [ì• ìŠ¤í„°ë¦¬í¬] :ëª¨ë“  ì»¬ëŸ¼ ì§€ì •
 FROM employees
 ;
 
 
 
 -- 5.
--- Áßº¹µÈ job id Á¦°Å
--- SELECT DISTINCT job_id ;     :Áßº¹µÈ µ¥ÀÌÅÍ¸¦ Á¦°ÅÇÏ°í Á¶È¸ÇÏ´Â Å°¿öµå
+-- ì¤‘ë³µëœ job id ì œê±°
+-- SELECT DISTINCT job_id ;     :ì¤‘ë³µëœ ë°ì´í„°ë¥¼ ì œê±°í•˜ê³  ì¡°íšŒí•˜ëŠ” í‚¤ì›Œë“œ
 SELECT DISTINCT job_id
 FROM employees;
 
 -- 6.
--- ±Þ¿©°¡ 6000´Þ·¯¸¦ ÃÊ°úÇÏ´Â »ç¿øÀÇ ¸ðµçÄÃ·³À» Á¶È¸ÇÏ´Â sql¹® ÀÛ¼º
--- WHERE Á¶°Ç : Á¶È¸Á¶°ÇÀ» ÀÛ¼ºÇÏ´Â ±¸¹®
+-- ê¸‰ì—¬ê°€ 6000ë‹¬ëŸ¬ë¥¼ ì´ˆê³¼í•˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“ ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” sqlë¬¸ ìž‘ì„±
+-- WHERE ì¡°ê±´ : ì¡°íšŒì¡°ê±´ì„ ìž‘ì„±í•˜ëŠ” êµ¬ë¬¸
 SELECT *
 FROM employees
 WHERE salary>6000
 ;
 
 -- 7.
--- ±Þ¿©°¡ 10000´Þ·¯ÀÎ »ç¿øÀÇ ¸ðµçÄÃ·³À» Á¶È¸ÇÏ´Â sql¹® ÀÛ¼º
+-- ê¸‰ì—¬ê°€ 10000ë‹¬ëŸ¬ì¸ ì‚¬ì›ì˜ ëª¨ë“ ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” sqlë¬¸ ìž‘ì„±
 SELECT *
 FROM employees
 WHERE salary = 10000;
 
 -- 8.
--- salary ±âÁØ ³»¸²Â÷¼ø, first_name±âÁØ ¿À¸§Â÷¼ø
--- ASC ¿À¸§Â÷¼ø     DESC ³»¸²Â÷¼ø
+-- salary ê¸°ì¤€ ë‚´ë¦¼ì°¨ìˆœ, first_nameê¸°ì¤€ ì˜¤ë¦„ì°¨ìˆœ
+-- ASC ì˜¤ë¦„ì°¨ìˆœ     DESC ë‚´ë¦¼ì°¨ìˆœ
 SELECT *
 FROM employees
 ORDER BY salary DESC, first_name ASC;
 
 
 -- 9.
---Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID°¡ ¡®FI_ACCOUNT¡¯ ÀÌ°Å³ª ¡®IT_PROG¡¯ ÀÎ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+--í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDê°€ â€˜FI_ACCOUNTâ€™ ì´ê±°ë‚˜ â€˜IT_PROGâ€™ ì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT *
 FROM employees
 WHERE job_id = 'FI_ACCOUNT' 
@@ -122,8 +122,8 @@ OR job_id = 'IT_PROG'
 
 
 -- 10.
--- Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID°¡ ¡®FI_ACCOUNT¡¯ ÀÌ°Å³ª ¡®IT_PROG¡¯ ÀÎ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
--- IN Å°¿öµå¸¦ »ç¿ëÇÏ¿© SQL Äõ¸®¸¦ ¿Ï¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDê°€ â€˜FI_ACCOUNTâ€™ ì´ê±°ë‚˜ â€˜IT_PROGâ€™ ì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- IN í‚¤ì›Œë“œë¥¼ ì‚¬ìš©í•˜ì—¬ SQL ì¿¼ë¦¬ë¥¼ ì™„ì„±í•˜ì‹œì˜¤.
 -- WHERE job_id IN ('FI_ACCOUNT', 'IT_PROG');
 
 SELECT *
@@ -132,75 +132,75 @@ WHERE job_id IN ('FI_ACCOUNT', 'IT_PROG')
 ;
 
 -- 11.
--- Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID°¡ ¡®FI_ACCOUNT¡¯ ÀÌ°Å³ª ¡®IT_PROG¡¯ ¾Æ´Ñ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDê°€ â€˜FI_ACCOUNTâ€™ ì´ê±°ë‚˜ â€˜IT_PROGâ€™ ì•„ë‹Œ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT *
 FROM employees
 WHERE job_id NOT IN ('FI_ACCOUNT', 'IT_PROG')
 ;
 
 -- 12.
--- Å×ÀÌºí EMPLOYEES ÀÇ JOB_ID°¡ ¡®IT_PROG¡¯ ÀÌ¸é¼­ SALARY °¡ 6000 ÀÌ»óÀÎ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
--- AND ¿¬»ê : µ¿½Ã¿¡, ±×¸®°í, ~ÀÌ¸é¼­
+-- í…Œì´ë¸” EMPLOYEES ì˜ JOB_IDê°€ â€˜IT_PROGâ€™ ì´ë©´ì„œ SALARY ê°€ 6000 ì´ìƒì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
+-- AND ì—°ì‚° : ë™ì‹œì—, ê·¸ë¦¬ê³ , ~ì´ë©´ì„œ
 SELECT *
 FROM employees
 WHERE job_id = 'IT_PROG' AND salary >= 6000
 ;
 
 -- 13.
--- Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ÀÌ ¡®S¡¯·Î ½ÃÀÛÇÏ´Â »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì´ â€˜Sâ€™ë¡œ ì‹œìž‘í•˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT *
 FROM employees
 WHERE first_name like 'S%'
 ;
 
 -- 14.
--- Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ÀÌ ¡®s¡¯·Î ³¡³ª´Â »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì´ â€˜sâ€™ë¡œ ëë‚˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT *
 FROM employees
 WHERE first_name like '%s'
 ;
 
 -- 15.
--- Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ¿¡ ¡®s¡¯°¡ Æ÷ÇÔµÇ´Â »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì— â€˜sâ€™ê°€ í¬í•¨ë˜ëŠ” ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT *
 FROM employees
 WHERE first_name like '%s%'
 ;
 
 -- 16.
--- Å×ÀÌºí EMPLOYEES ÀÇ FIRST_NAME ÀÌ 5±ÛÀÚÀÎ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ FIRST_NAME ì´ 5ê¸€ìžì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT *
 FROM employees
 WHERE first_name like '_____'
--- WHERE LENGTH(first_name) = 5;            ±ÛÀÚ¼ö ¹ÝÈ¯ÇÏ´Â ÇÔ¼ö
+-- WHERE LENGTH(first_name) = 5;            ê¸€ìžìˆ˜ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
 ;
 
 -- 17.
--- Å×ÀÌºí EMPLOYEES ÀÇ COMMISSION_PCT°¡ NULL ÀÎ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ COMMISSION_PCTê°€ NULL ì¸ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT *
 FROM employees
 WHERE COMMISSION_PCT is NULL
 ;
 
 -- 18.
--- Å×ÀÌºí EMPLOYEES ÀÇ COMMISSION_PCT°¡ NULLÀÌ ¾Æ´Ñ »ç¿øÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ COMMISSION_PCTê°€ NULLì´ ì•„ë‹Œ ì‚¬ì›ì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT *
 FROM employees
 WHERE COMMISSION_PCT IS NOT NULL
 ;
 
 -- 19.
--- Å×ÀÌºí EMPLOYEES ÀÇ »ç¿øÀÇ HIRE_DATE°¡ 04³â ÀÌ»óÀÎ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ ì‚¬ì›ì˜ HIRE_DATEê°€ 04ë…„ ì´ìƒì¸ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT *
 FROM employees
 WHERE HIRE_DATE >= '04/01/01'
 -- WHERE hire_date >= TO_DATE('20040101', 'YYYY/MM/DD')
--- TO_DATE ¹®ÀÚÇü µ¥ÀÌÅÍ¸¦ ³¯Â¥Çü µ¥ÀÌÅÍ·Î º¯È¯
+-- TO_DATE ë¬¸ìží˜• ë°ì´í„°ë¥¼ ë‚ ì§œí˜• ë°ì´í„°ë¡œ ë³€í™˜
 ;
 
 
 -- 20.
--- Å×ÀÌºí EMPLOYEES ÀÇ »ç¿øÀÇ HIRE_DATE°¡ 04³âµµºÎÅÍ 05³âµµÀÎ ¸ðµç ÄÃ·³À» Á¶È¸ÇÏ´Â SQL ¹®À» ÀÛ¼ºÇÏ½Ã¿À.
+-- í…Œì´ë¸” EMPLOYEES ì˜ ì‚¬ì›ì˜ HIRE_DATEê°€ 04ë…„ë„ë¶€í„° 05ë…„ë„ì¸ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•˜ëŠ” SQL ë¬¸ì„ ìž‘ì„±í•˜ì‹œì˜¤.
 SELECT *
 FROM employees
 WHERE HIRE_DATE BETWEEN '04/01/01' AND '05/12/31'
